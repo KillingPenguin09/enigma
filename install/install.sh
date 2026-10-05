@@ -3,6 +3,9 @@ set -e
 
 echo "Starting Enigma installation..."
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(dirname "$SCRIPT_DIR")"
+
 # Packages to install
 PACMAN_PKGS=(
     qt6-declarative qt6-svg qt6-wayland qt6-5compat
@@ -44,8 +47,8 @@ mkdir -p "$ENIGMA_SHARE" "$ENIGMA_CONFIG"
 
 # Copy source files
 echo "Copying source files to $ENIGMA_SHARE..."
-cp -rf ../bin "$ENIGMA_SHARE/"
-cp -rf ../src "$ENIGMA_SHARE/"
+cp -rf "$REPO_ROOT/bin" "$ENIGMA_SHARE/"
+cp -rf "$REPO_ROOT/src" "$ENIGMA_SHARE/"
 
 # Copy quickshell config
 echo "Copying quickshell config to $QUICKSHELL_CONFIG..."
@@ -53,6 +56,6 @@ if [ -d "$QUICKSHELL_CONFIG" ]; then
     echo "Backing up existing quickshell config to ${QUICKSHELL_CONFIG}.bak..."
     mv "$QUICKSHELL_CONFIG" "${QUICKSHELL_CONFIG}.bak"
 fi
-cp -rf ../src/quickshell "$QUICKSHELL_CONFIG"
+cp -rf "$REPO_ROOT/src/quickshell" "$QUICKSHELL_CONFIG"
 
 echo "Installation complete!"
