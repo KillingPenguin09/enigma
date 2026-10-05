@@ -1,0 +1,17 @@
+[32m  INFO[0m: Launching config: "/home/vibhu/.config/quickshell/shell.qml"
+[32m  INFO[0m: Shell ID: "a90b0bdc1626c83b7c0f33a4ab499fd7" Path ID "a90b0bdc1626c83b7c0f33a4ab499fd7"
+[32m  INFO[0m: Saving logs to "/run/user/1000/quickshell/by-id/eu2jtnamt/log.qslog"
+[33m  WARN[97m scene[0m: QML Connections at @launcher/Launcher.qml[181:5]: Detected function "onCountChanged" in Connections element. This is probably intended to be a signal handler but no signal of the target matches the name.
+[32m  INFO[0m: Configuration Loaded
+[33m  WARN[97m scene[0m: QML FileView at @singletons/system/CurrentFocus.qml[21:5]: Read of /run/user/1000/enigma/focustime/focus_state.json failed: File does not exist.
+[33m  WARN[97m scene[0m: @screenshot/ScreenshotOverlay.qml[366:-1]: TypeError: Cannot call method 'trim' of undefined
+[33m  WARN[97m scene[0m: QML FileView at @quickactions/actions/DrawAction.qml[109:5]: Read of /home/vibhu/.local/state/enigma/quickactions/palettes.json failed: File does not exist.
+[33m  WARN[97m quickshell.service.polkit.listener[0m: failed to register listener: GDBus.Error:org.freedesktop.PolicyKit1.Error.Failed: An authentication agent already exists for the given subject
+[33m  WARN[97m quickshell.service.polkit[0m: failed to register listener on path "/org/quickshell/PolkitAgent"
+[33m  WARN[97m scene[0m: QML FileView at @singletons/system/Updater.qml[136:5]: Read of /home/vibhu/.local/state/enigma/version failed: File does not exist.
+[33m  WARN[97m scene[0m: QML FileView at @singletons/system/Updater.qml[119:5]: Read of /home/vibhu/.config/quickshell/version.txt failed: File does not exist.
+[32m  INFO[97m qt.multimedia.ffmpeg[0m: Using Qt multimedia with FFmpeg version n9.0.2 GPL version 3 or later
+[33m  WARN[97m scene[0m: QML Settings at @wallpaper/WallpaperPicker.qml[501:5]: Failed to initialize QSettings instance. Status code is: 1
+[33m  WARN[97m scene[0m: QML Settings at @wallpaper/WallpaperPicker.qml[501:5]: The following application identifiers have not been set: QList("organizationName", "organizationDomain")
+[33m  WARN[97m scene[0m: @media/MusicPopup.qml[2326:-1]: TypeError: Cannot read property 'length' of undefined
+[33m  WARN[97m scene[0m: QML NumberAnimation at @media/MusicPopup.qml[1048:37]: setPaused() cannot be used when animation isn't running.

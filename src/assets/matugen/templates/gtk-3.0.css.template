@@ -1,0 +1,62 @@
+@define-color base {{colors.surface_container_lowest.default.hex}};
+@define-color mantle {{colors.surface_container_low.default.hex}};
+@define-color crust {{colors.surface.default.hex}};
+@define-color text {{colors.on_surface.default.hex}};
+@define-color subtext0 {{colors.on_surface_variant.default.hex}};
+@define-color subtext1 {{colors.outline.default.hex}};
+@define-color surface0 {{colors.surface_container.default.hex}};
+@define-color surface1 {{colors.surface_container_high.default.hex}};
+@define-color surface2 {{colors.surface_container_highest.default.hex}};
+@define-color mauve {{colors.primary.default.hex}};
+@define-color blue {{colors.secondary.default.hex}};
+
+window, window.background {
+    background-color: @base;
+    color: @text;
+}
+
+/* Thunar main view */
+.thunar, .view, textview text, iconview, treeview {
+    background-color: @base;
+    color: @text;
+}
+
+/* Thunar sidebar */
+.sidebar, .sidebar .view, .sidebar treeview {
+    background-color: @surface0;
+    color: @subtext0;
+}
+
+/* Header bar */
+headerbar {
+    background-color: @base;
+    color: @text;
+    box-shadow: none;
+    border: none;
+}
+
+/* Selected items */
+.view:selected, iconview:selected, treeview:selected, row:selected {
+    background-color: alpha(@mauve, 0.2);
+    color: @mauve;
+    border-radius: 4px;
+}
+
+/* Pathbar / Breadcrumbs */
+.path-bar button {
+    background-color: transparent;
+    color: @subtext0;
+    border-radius: 6px;
+    border: none;
+    box-shadow: none;
+}
+
+.path-bar button:hover {
+    background-color: @surface0;
+    color: @text;
+}
+
+.path-bar button:checked {
+    background-color: @surface1;
+    color: @mauve;
+}
