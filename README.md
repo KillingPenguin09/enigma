@@ -1,5 +1,5 @@
 # Enigma
-My highly customized Quickshell and Hyprland setup.
+My Quickshell setup
 
 ## Installation
 Clone the repository and run the install script:
