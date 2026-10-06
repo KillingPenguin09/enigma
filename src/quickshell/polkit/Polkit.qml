@@ -5,6 +5,7 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import "../reusables"
+import "../reusables/buttons"
 import "../"
 
 PanelWindow {
@@ -123,43 +124,46 @@ PanelWindow {
         ColumnLayout {
             id: cardLayout
             anchors.fill: parent
-            anchors.margins: polkitWindow.s(22)
-            spacing: polkitWindow.s(16)
+            anchors.margins: polkitWindow.s(18)
+            spacing: polkitWindow.s(14)
 
-            Text {
-                text: {
-                    if (PolkitService.flow && PolkitService.flow.message) return PolkitService.flow.message;
-                    return typeof I18n !== "undefined" ? I18n.t("polkit.default_message") : "An application is requesting administrative rights.";
-                }
-                color: ThemeBackend.text
-                font.family: ThemeBackend.fontFamily
-                font.pixelSize: polkitWindow.s(15)
-                font.weight: Font.Bold
-                wrapMode: Text.Wrap
-                horizontalAlignment: Text.AlignHCenter
+            ColumnLayout {
                 Layout.fillWidth: true
-            }
+                Layout.alignment: Qt.AlignHCenter
+                spacing: polkitWindow.s(8)
 
-            Text {
-                text: {
-                    if (PolkitService.flow && PolkitService.flow.actionId) return PolkitService.flow.actionId;
-                    return typeof I18n !== "undefined" ? I18n.t("polkit.default_description") : "Authentication is needed to run this action as superuser.";
+                Text {
+                    text: {
+                        if (PolkitService.flow && PolkitService.flow.actionId) return PolkitService.flow.actionId;
+                        return typeof I18n !== "undefined" ? I18n.t("polkit.default_description") : "Authentication is needed to run this action as superuser.";
+                    }
+                    color: ThemeBackend.subtext0
+                    font.family: ThemeBackend.fontFamily
+                    font.pixelSize: polkitWindow.s(12)
+                    wrapMode: Text.Wrap
+                    horizontalAlignment: Text.AlignHCenter
+                    Layout.fillWidth: true
                 }
-                color: ThemeBackend.subtext0
-                font.family: ThemeBackend.fontFamily
-                font.pixelSize: polkitWindow.s(12)
-                wrapMode: Text.Wrap
-                horizontalAlignment: Text.AlignHCenter
-                Layout.fillWidth: true
-                visible: text.length > 0
+
+                Text {
+                    text: {
+                        if (PolkitService.flow && PolkitService.flow.message) return PolkitService.flow.message;
+                        return typeof I18n !== "undefined" ? I18n.t("polkit.default_message") : "An application is requesting administrative rights.";
+                    }
+                    color: ThemeBackend.text
+                    font.family: ThemeBackend.fontFamily
+                    font.pixelSize: polkitWindow.s(14)
+                    font.weight: Font.Bold
+                    wrapMode: Text.Wrap
+                    horizontalAlignment: Text.AlignHCenter
+                    Layout.fillWidth: true
+                }
             }
 
             Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 1
-                color: ThemeBackend.surface1
-                Layout.topMargin: polkitWindow.s(4)
-                Layout.bottomMargin: polkitWindow.s(4)
+                color: Qt.alpha(ThemeBackend.surface1, 0.5)
             }
 
             Rectangle {
@@ -256,129 +260,6 @@ PanelWindow {
                     enabled: passwordInput.text.length > 0 || polkitWindow.isAuthenticating
                     onClicked: polkitWindow.submitPassword()
                 }
-            }
-        }
-                        font.family: "Iosevka Nerd Font"
-                        font.pixelSize: polkitWindow.s(22)
-                        color: ThemeBackend.mauve
-                    }
-                }
-
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignVCenter
-                    spacing: polkitWindow.s(3)
-
-                    Text {
-                        text: {
-                            if (PolkitService.flow && PolkitService.flow.message) return PolkitService.flow.message;
-                            return typeof I18n !== "undefined" ? I18n.t("polkit.default_message") : "An application is requesting administrative rights.";
-                        }
-                        color: ThemeBackend.text
-                        font.family: ThemeBackend.fontFamily
-                        font.pixelSize: polkitWindow.s(14)
-                        font.weight: Font.Bold
-                        wrapMode: Text.Wrap
-                        Layout.fillWidth: true
-                    }
-
-                    Text {
-                        text: {
-                            if (PolkitService.flow && PolkitService.flow.actionId) return PolkitService.flow.actionId;
-                            return typeof I18n !== "undefined" ? I18n.t("polkit.default_description") : "Authentication is needed to run this action as superuser.";
-                        }
-                        color: ThemeBackend.subtext0
-                        font.family: ThemeBackend.fontFamily
-                        font.pixelSize: polkitWindow.s(12)
-                        wrapMode: Text.Wrap
-                        Layout.fillWidth: true
-                    }
-                }
-
-                IconButton {
-                    Layout.preferredWidth: polkitWindow.toolbarHeight
-                    Layout.preferredHeight: polkitWindow.toolbarHeight
-                    Layout.alignment: Qt.AlignTop
-                    cornerRadius: polkitWindow.crSmall
-                    buttonIcon: "󰅖"
-                    iconFontSize: polkitWindow.s(14)
-                    accentColor: ThemeBackend.surface1
-                    textColor: ThemeBackend.text
-                    onClicked: PolkitService.cancel()
-                }
-            }
-
-            Rectangle {
-                Layout.fillWidth: true
-                implicitHeight: errorText.implicitHeight + polkitWindow.s(12)
-                radius: polkitWindow.crSmall
-                color: Qt.alpha(ThemeBackend.red, 0.12)
-                border.color: Qt.alpha(ThemeBackend.red, 0.4)
-                border.width: 1
-                visible: PolkitService.errorMessage !== ""
-
-                RowLayout {
-                    anchors.fill: parent
-                    anchors.margins: polkitWindow.s(6)
-                    spacing: polkitWindow.s(8)
-
-                    Text {
-                        text: "󰅚"
-                        font.family: "Iosevka Nerd Font"
-                        font.pixelSize: polkitWindow.s(14)
-                        color: ThemeBackend.red
-                    }
-
-                    Text {
-                        id: errorText
-                        text: PolkitService.errorMessage
-                        color: ThemeBackend.red
-                        font.family: ThemeBackend.fontFamily
-                        font.pixelSize: polkitWindow.s(12)
-                        font.weight: Font.Medium
-                        wrapMode: Text.Wrap
-                        Layout.fillWidth: true
-                    }
-                }
-            }
-
-            PasswordInput {
-                id: passwordInput
-                Layout.fillWidth: true
-                Layout.preferredHeight: polkitWindow.toolbarHeight + polkitWindow.s(6)
-                visible: !PolkitService.flow || PolkitService.flow.isResponseRequired !== false
-
-                baseColor: ThemeBackend.surface0
-                accentColor: ThemeBackend.mauve
-                textColor: ThemeBackend.text
-                subTextColor: ThemeBackend.subtext0
-                errorColor: ThemeBackend.red
-                busyColor: ThemeBackend.peach
-
-                cornerRadius: polkitWindow.crSmall
-                horizontalPadding: polkitWindow.s(10)
-                verticalPadding: polkitWindow.s(4)
-
-                fontFamily: ThemeBackend.fontFamily
-                fontPixelSize: polkitWindow.s(13)
-
-                showLockIcon: true
-                showSubmitButton: true
-                lockButtonSize: polkitWindow.toolbarHeight + polkitWindow.s(2)
-
-                hasError: PolkitService.errorMessage !== ""
-                isBusy: polkitWindow.isAuthenticating
-
-                placeholderText: {
-                    if (PolkitService.flow && PolkitService.flow.inputPrompt) {
-                        let p = PolkitService.flow.inputPrompt.trim();
-                        if (p.endsWith(":")) p = p.slice(0, -1);
-                        return p;
-                    }
-                    return typeof I18n !== "undefined" ? I18n.t("polkit.password_placeholder") : "Password";
-                }
-
-                onAccepted: polkitWindow.submitPassword()
             }
         }
     }
